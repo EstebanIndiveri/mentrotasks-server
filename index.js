@@ -1,32 +1,29 @@
-const express=require('express');
-const conectarDB=require('./config/db');
+const express = require('express');
+const conectarDB = require('./config/db');
 const cors = require('cors');
-//creamos el server
 
-const app=express();
+// crear el servidor
+const app = express();
 
-//conectamos a la base de datos
+// Conectar a la base de datos
 conectarDB();
 
-//habilitar cors
+// habilitar cors
 app.use(cors());
 
-//habilitar express.json
-app.use(express.json({extended:true}));
+// Habilitar express.json
+app.use( express.json({ extended: true }));
 
-//puerto de app y heroku
-const port = process.env.port || 4000; 
+// puerto de la app
+const port = process.env.PORT || 4000;
 
-//importamos las rutas
-app.use('/api/usuarios',require('./routes/usuarios'));
+// Importar rutas
+app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/proyectos', require('./routes/proyectos'));
+app.use('/api/tareas', require('./routes/tareas'));
 
-app.use('/api/auth',require('./routes/auth'));
-app.use('/api/proyectos',require('./routes/proyectos'));
-
-//routing de tareas
-app.use('/api/tareas',require('./routes/tareas'));
-
-
-app.listen(port,'0.0.0.0',()=>{
+// arrancar la app
+app.listen(port, '0.0.0.0', () => {
     console.log(`El servidor esta funcionando en el puerto ${port}`);
 });

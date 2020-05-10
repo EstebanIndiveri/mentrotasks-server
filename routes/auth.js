@@ -9,9 +9,7 @@ const auth = require('../middleware/auth');
 //Iniciar sesión:
 // api/auth
 router.post('/',
-[
-
-],  authController.autenticarUsuario
+    authController.autenticarUsuario
 );
 
 router.get('/',
